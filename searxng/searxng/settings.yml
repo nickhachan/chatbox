@@ -1,0 +1,56 @@
+sudo tee /home/searXNG/searxng/settings.yml << 'EOF'
+
+use_default_settings: true
+
+server:
+  port: 8080
+  bind_address: "0.0.0.0"
+  secret_key: "508ecca21a610e3917211ca0854650453edb5ebd0957e35b2175dab0172aa468" 
+  limiter: false
+  image_proxy: true
+
+search:
+  safe_search: 0
+  autocomplete: "google"
+  formats:
+    - html
+    - json
+  api_cross_origin: true
+
+ui:
+  static_use_hash: true
+  query_in_title: true
+
+
+engines:
+  - name: google
+    engine: google
+    shortcut: g
+    timeout: 3.0
+    disabled: false
+
+  - name: duckduckgo
+    engine: duckduckgo
+    shortcut: ddg
+    timeout: 3.0
+    disabled: false
+
+  - name: wikipedia
+    engine: wikipedia
+    shortcut: w
+    timeout: 2.0
+    disabled: false
+
+  - name: bing
+    engine: bing
+    shortcut: b
+    timeout: 3.0
+    disabled: true
+
+  - name: qwant
+    engine: qwant
+    shortcut: qw
+    timeout: 3.0
+    disabled: true
+
+EOF

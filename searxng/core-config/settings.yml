@@ -1,0 +1,14 @@
+use_default_settings: true
+server:
+  port: 8080
+  bind_address: "0.0.0.0"
+  secret_key: "dummykey"
+  limiter: false
+  image_proxy: true
+search:
+  safe_search: 0
+  autocomplete: "google"
+  formats:
+    - html
+    - json
+  api_cross_origin: true
