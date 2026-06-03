@@ -1,0 +1,28 @@
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    ports:
+      - "3000:8080"
+    volumes:
+      - open-webui:/app/backend/data
+    environment:
+      - OPENAI_API_BASE_URL=http://host.docker.internal:8000/v1
+      - OPENAI_API_KEY=dummy-key
+      - ENV=prod
+      - SCARF_NO_ANALYTICS=true
+      - DO_NOT_TRACK=true
+      - ANONYMIZED_TELEMETRY=false
+      - WEBUI_AUTH=true
+    restart: unless-stopped
+    networks:
+      - network_searxng
+
+volumes:
+  open-webui:
+    external: true
+
+networks:
+  network_searxng:
+    external: true
+    name: searxng_default

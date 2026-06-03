@@ -1,0 +1,37 @@
+services:
+  vllm:
+    image: vllm/vllm-openai:nightly
+    container_name: vllm
+    restart: always
+    ports:
+      - "8000:8000"
+    volumes:
+      - /home/models/huggingface:/root/.cache/huggingface
+    environment:
+      - HF_TOKEN=dummy-token
+    ipc: host
+    shm_size: "16gb"
+    command: >
+      --model google/gemma-4-E4B-it
+      --dtype auto
+      --max-model-len 16384
+      --max-num-seqs 8342
+      --limit-mm-per-prompt '{"image": 1}'
+      --quantization fp8
+      --gpu-memory-utilization 0.95
+      --max-num-seqs 2
+      --compilation-config '{"cudagraph_mode":"FULL_DECODE_ONLY"}'
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ['1']
+              capabilities: [gpu]
+    networks:
+      - network_searxng
+
+networks:
+  network_searxng:
+    external: true
+    name: searxng_default
