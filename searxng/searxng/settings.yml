@@ -5,7 +5,7 @@ use_default_settings: true
 server:
   port: 8080
   bind_address: "0.0.0.0"
-  secret_key: "508ecca21a610e3917211ca0854650453edb5ebd0957e35b2175dab0172aa468" 
+  secret_key: "" 
   limiter: false
   image_proxy: true
 
